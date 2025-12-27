@@ -1,71 +1,243 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Pastelaria Ponto X - Cardápio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="PxCardapio.css">
-</head>
-<body>
+/* PxCardapio.css 
+   Identidade: Pastelaria Ponto X (Desde 1997)
+   Estilo: Rústico, Artesanal e Transparente
+*/
 
-<div class="background-fix"></div>
+:root {
+  --red-vibrant: #D62828;      /* Botões e Destaques [cite: 79] */
+  --yellow-pastel: #FECF4D;    /* Mascote e Detalhes [cite: 79] */
+  --brown-title: #8B5E3C;      /* Nomes dos Pastéis (Madeira) [cite: 79] */
+  --brown-desc: #A67C52;       /* Descrições Suaves [cite: 79] */
+  --white: #FFFFFF;            /* Contraste e Texto [cite: 79] */
+  
+  /* Configurações de Transparência */
+  --bg-overlay: rgba(254, 207, 77, 0.2); /* Overlay Amarelo Pastel [cite: 79] */
+  --nav-bg: rgba(255, 255, 255, 0.8);    /* Menu semi-transparente */
+  --card-bg: rgba(255, 253, 245, 0.75);  /* Cards semi-transparentes */
+}
 
-<header>
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjB6c19-2fGbhqEYzI6_53zxDgiSskUkpHpzfd2RvzCsvyUwFHRk_C4s1repU9xlWcErFanYeneXCCsgSBiZ21XlMpxtEvWQrLvdwoQFvjejZXrHnhdmlXnKLmE9PH1vEs1OmWQELgwKVbpSjP9pWO4wODoUJzVPZ2ISO2oa_fj2FqLeClyvQ2O9A8-_1g_/s1536/copilot_image_1766789238349.jpeg" 
-         class="logo-top" alt="Logo Ponto X">
-    <h3>Pastéis artesanais fritos na hora</h3>
-</header>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-<nav class="main-nav">
-    <button class="btn-nav active" id="btn-mais_pedidos" onclick="selecionar('mais_pedidos')">MAIS PEDIDOS</button>
-    <button class="btn-nav" id="btn-tradicionais" onclick="selecionar('tradicionais')">TRADICIONAIS</button>
-    <button class="btn-nav" id="btn-especiais" onclick="selecionar('especiais')">ESPECIAIS</button>
-    <button class="btn-nav" id="btn-combinados" onclick="selecionar('combinados')">COMBINADOS</button>
-    <button class="btn-nav" id="btn-doces" onclick="selecionar('doces')">DOCES</button>
-</nav>
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fdf5e6;
+  color: #333;
+  line-height: 1.5;
+}
 
-<main id="sabores" class="categoria-container"></main>
+/* --- FUNDO COM IMAGEM E FILTRO --- */
+.background-fix {
+  position: fixed;
+  inset: 0;
+  background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQzU2COpz81-VruWYuwl0sfBrPNxZXqLaBCcMOxI5_uodNMtmBA6S2C__WPZlwf_uL8wVFwoXbiWxo_mOqpuVR8YKRcWmXk7wkBLJBr9vndsW5pDY32Bc8XiKUQpaboffvVuwHKH-wCltfp9I1nSgVMov29GpnxqdnLL6tZcjC-1b4FA2F-tEnIL3oG5Wy/s1024/copilot_image_1766792478706.jpeg') center/cover no-repeat;
+  z-index: -1;
+}
 
-<div id="carrinhoToggle" onclick="toggleCarrinho()">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKzQ4HTTrh0wvX7t4utVGspGkRk3x0SIqzCDg0DIcGX-wabyCigxuPDsymqdaA2b-S2BeqE9hhCpXkHr9t9T5-9ndv4MB_BpKSvGfelM92CQ_sNbjza1gf240jcBitzcRgAaBRFOgfIQpskLb1TubrphlBAy7Pd8B-9Y9MsqnMsLlh1p-oRaHBfW2PliEC/s1536/copilot_image_1766789695033.jpeg" 
-         class="mascote-carrinho-img" alt="Carrinho">
-    <span id="cart-count">0</span>
-</div>
+.background-fix::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-overlay);
+  backdrop-filter: brightness(0.65);
+}
 
-<section id="carrinho">
-    <h2>SEU PEDIDO</h2>
-    <textarea id="pedido" class="input-grande" style="height: 150px;" readonly></textarea>
-    
-    <div class="total-container" style="text-align: center; margin: 20px 0;">
-        <h3 style="color: #8B5E3C;">Total: R$ <span id="total-valor" style="color: #D62828;">0.00</span></h3>
-    </div>
+/* --- CABEÇALHO --- */
+header {
+  text-align: center;
+  padding: 40px 20px;
+}
 
-    <input type="text" id="obs" class="input-grande" placeholder="Alguma observação?">
-    
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <button class="btn-nav" style="flex:1" onclick="mostrarDados('retirar')">RETIRAR</button>
-        <button class="btn-nav" style="flex:1" onclick="mostrarDados('delivery')">DELIVERY</button>
-    </div>
+.logo-top {
+  width: 240px;
+  filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.4));
+  margin-bottom: 10px;
+}
 
-    <div id="entregaCampos" style="display:none;">
-        <input id="endereco" class="input-grande" placeholder="Endereço completo">
-        <select id="bairro" class="input-grande" onchange="atualizarFrete()">
-            <option value="0">Escolha o Bairro (Taxa)</option>
-            <option value="3">Centro - R$ 3,00</option>
-            <option value="5">Vila Nova - R$ 5,00</option>
-        </select>
-    </div>
+header h3 {
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
 
-    <select id="pagamento" class="input-grande">
-        <option value="Pix">Pix</option>
-        <option value="Cartão">Cartão</option>
-        <option value="Dinheiro">Dinheiro</option>
-    </select>
+/* --- BARRA DE MENU (TRANSPARENTE) --- */
+.main-nav {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 15px;
+  position: sticky;
+  top: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px); /* Efeito de vidro para legibilidade */
+  z-index: 10;
+  border-bottom: 3px solid var(--brown-title);
+  scrollbar-width: none;
+}
 
-    <button id="enviar" onclick="enviarPedido()">✅ FINALIZAR WHATSAPP</button>
-    <button class="btn-nav" style="width: 100%; margin-top: 10px;" onclick="toggleCarrinho()">VOLTAR AO CARDÁPIO</button>
-</section>
+.main-nav::-webkit-scrollbar { display: none; }
 
-<script src="PxCardapio.js"></script>
-</body>
-</html>
+.btn-nav {
+  flex: 0 0 auto;
+  padding: 12px 24px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border-radius: 50px;
+  background: var(--white);
+  color: var(--brown-title);
+  border: 2px solid var(--brown-title);
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+.btn-nav.active {
+  background: var(--red-vibrant);
+  border-color: var(--red-vibrant);
+  color: var(--white);
+  box-shadow: 0 4px 10px rgba(214, 40, 40, 0.3);
+}
+
+/* --- CARTÕES DE PRODUTOS (TRANSPARENTES) --- */
+.categoria-container {
+  padding: 15px;
+  margin-bottom: 110px;
+}
+
+.item-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px); /* Suaviza a imagem de fundo atrás do texto */
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  border-bottom: 5px solid var(--brown-title); 
+  position: relative;
+  overflow: hidden;
+}
+
+.item-card h3 {
+  color: var(--brown-title); /* Marrom rústico [cite: 79] */
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  font-weight: 900;
+}
+
+.item-card p {
+  color: var(--brown-desc); /* Marrom suave [cite: 79] */
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+
+.preco {
+  font-size: 1.7rem;
+  font-weight: 900;
+  color: var(--red-vibrant);
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* --- BOTÃO ADICIONAR --- */
+.btn-add {
+  width: 100%;
+  padding: 16px;
+  background: var(--red-vibrant);
+  color: var(--white);
+  font-weight: 900;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 0px #9b1b1b;
+  transition: 0.1s;
+}
+
+.btn-add:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+/* --- CARRINHO (MASCOTE) --- */
+#carrinhoToggle {
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  background: var(--red-vibrant);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  z-index: 99;
+  border: 4px solid var(--yellow-pastel);
+  cursor: pointer;
+}
+
+.mascote-carrinho-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+#cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--yellow-pastel);
+  color: var(--brown-title);
+  font-weight: 900;
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--red-vibrant);
+}
+
+/* --- MODAL DO CARRINHO --- */
+#carrinho {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffcf5;
+  padding: 20px;
+  transition: 0.4s ease-in-out;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+#carrinho.open { top: 0; }
+
+.input-grande {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 2px solid #e2d7c5;
+  background: #fff;
+  color: var(--brown-title);
+}
+
+#enviar {
+  width: 100%;
+  padding: 20px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-bottom: 60px;
+}
