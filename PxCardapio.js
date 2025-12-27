@@ -216,7 +216,7 @@ function enviarPedido() {
     msg += `\n*MODALIDADE:* Retirada no Local`;
   }
 
-  const fone = "5511943198316"; 
+  const fone = "5511920672544"; 
   window.open(`https://wa.me/${fone}?text=${encodeURIComponent(msg)}`);
 }
 
