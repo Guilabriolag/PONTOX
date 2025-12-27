@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Pastelaria Ponto X - Cardápio Digital</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="McCardapio.css">
+    <link rel="stylesheet" href="PxCardapio.css">
 </head>
 <body>
 
@@ -29,43 +29,59 @@
 <main id="sabores" class="categoria-container"></main>
 
 <div id="carrinhoToggle" onclick="toggleCarrinho()">
-    🛒 <span id="cart-count">0</span>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKzQ4HTTrh0wvX7t4utVGspGkRk3x0SIqzCDg0DIcGX-wabyCigxuPDsymqdaA2b-S2BeqE9hhCpXkHr9t9T5-9ndv4MB_BpKSvGfelM92CQ_sNbjza1gf240jcBitzcRgAaBRFOgfIQpskLb1TubrphlBAy7Pd8B-9Y9MsqnMsLlh1p-oRaHBfW2PliEC/s1536/copilot_image_1766789695033.jpeg" 
+         class="mascote-carrinho-img" alt="Carrinho">
+    <span id="cart-count">0</span>
 </div>
 
 <section id="carrinho">
     <h2>MEU PEDIDO</h2>
     <textarea id="pedido" readonly placeholder="Seu carrinho está vazio..."></textarea>
+    
     <div class="campo-adicional">
-        <label for="obs">Observações (Ex: Sem milho):</label>
-        <input type="text" id="obs" class="input-grande">
+        <label for="obs">Observações (Ex: Sem cebola, bem frito):</label>
+        <input type="text" id="obs" class="input-grande" placeholder="Alguma observação?">
     </div>
+
     <div class="total-container">
         <h3>Total: R$ <span id="total-valor">0.00</span></h3>
     </div>
+
     <div class="carrinho-acoes">
-        <button class="btn-secundario" onclick="editarPedido()">🗑️ Limpar</button>
-        <button class="btn-secundario" onclick="toggleCarrinho()">⬅️ Voltar</button>
+        <button class="btn-secundario" onclick="editarPedido()">🗑️ LIMPAR</button>
+        <button class="btn-secundario" onclick="toggleCarrinho()">⬅️ VOLTAR</button>
     </div>
+
     <hr style="margin: 20px 0; border: 1px solid #333;">
+
     <div class="entrega-grid">
         <button class="btn-opcao-gigante active" id="btn-retirar" onclick="mostrarDados('retirar')">RETIRAR NO LOCAL</button>
         <button class="btn-opcao-gigante" id="btn-delivery" onclick="mostrarDados('delivery')">DELIVERY</button>
     </div>
+
     <div id="entregaCampos" style="display:none;">
-        <input id="endereco" class="input-grande" placeholder="Endereço completo">
+        <input id="endereco" class="input-grande" placeholder="Rua, número e ponto de referência">
+        
         <select id="bairro" class="input-grande" onchange="atualizarFrete()">
-            <option value="0">Selecione o Bairro (Taxa)</option>
+            <option value="0">Selecione o Bairro (Taxa de Entrega)</option>
             <option value="3">CENTRO - R$ 3,00</option>
             <option value="3">JD BOM JESUS - R$ 3,00</option>
             <option value="4">MORRO BRANCO - R$ 4,00</option>
             <option value="10">GREEN HILLS - R$ 10,00</option>
+            <option value="3">VILA NOVA - R$ 3,00</option>
+            <option value="7">PAIOL / KM 50 - R$ 7,00</option>
         </select>
     </div>
-    <select id="pagamento" class="input-grande">
-        <option value="Pix">Pix</option>
-        <option value="Cartão">Cartão</option>
-        <option value="Dinheiro">Dinheiro</option>
+
+    <select id="pagamento" class="input-grande" onchange="if(this.value=='Dinheiro'){document.getElementById('valorTroco').style.display='block'}else{document.getElementById('valorTroco').style.display='none'}">
+        <option value="">FORMA DE PAGAMENTO</option>
+        <option value="Pix">PIX</option>
+        <option value="Cartão">CARTÃO (LEVAMOS A MÁQUINA)</option>
+        <option value="Dinheiro">DINHEIRO</option>
     </select>
+
+    <input id="valorTroco" class="input-grande" style="display:none;" placeholder="Troco para quanto?">
+
     <button id="enviar" onclick="enviarPedido()">✅ FINALIZAR NO WHATSAPP</button>
 </section>
 
@@ -77,6 +93,6 @@
     </div>
 </div>
 
-<script src="McCardapio.js"></script>
+<script src="PxCardapio.js"></script>
 </body>
 </html>
