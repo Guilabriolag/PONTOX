@@ -1,11 +1,12 @@
 :root {
-  --red: #D62828;
-  --yellow: #FECF4D;
+  /* Cores atualizadas conforme a Ficha Técnica da Pastelaria Ponto X */
+  --red: #D62828;    /* Vermelho Principal  */
+  --yellow: #FECF4D; /* Amarelo Pastel  */
   --dark: #0a0a0a;
   --gray: #1a1a1a;
   --light-gray: #333;
   --white: #ffffff;
-  --green: #25d366;
+  --green: #25d366; /* Cor do WhatsApp [cite: 74] */
 }
 
 * {
@@ -16,16 +17,19 @@
 }
 
 body {
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background: var(--dark);
   color: var(--white);
+  line-height: 1.6;
 }
 
+/* Fundo Fixo com Imagem da Identidade Visual */
 .background-fix {
   position: fixed;
   inset: 0;
+  /* Background imagem de fundo fornecida  */
   background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQzU2COpz81-VruWYuwl0sfBrPNxZXqLaBCcMOxI5_uodNMtmBA6S2C__WPZlwf_uL8wVFwoXbiWxo_mOqpuVR8YKRcWmXk7wkBLJBr9vndsW5pDY32Bc8XiKUQpaboffvVuwHKH-wCltfp9I1nSgVMov29GpnxqdnLL6tZcjC-1b4FA2F-tEnIL3oG5Wy/s1024/copilot_image_1766792478706.jpeg') center/cover;
-  filter: brightness(0.35);
+  filter: brightness(0.35); /* Escurecido para facilitar leitura */
   z-index: -1;
 }
 
@@ -35,11 +39,21 @@ header {
 }
 
 .logo-top {
-  width: 220px;
+  width: 250px;
   height: auto;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
 }
 
+header h3 {
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+/* Navegação Principal */
 .main-nav {
   display: flex;
   overflow-x: auto;
@@ -47,64 +61,127 @@ header {
   padding: 15px;
   position: sticky;
   top: 0;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(10px);
   z-index: 10;
+  scrollbar-width: none;
 }
 
+.main-nav::-webkit-scrollbar { display: none; }
+
+/* Botões do Menu - Cores combinadas */
 .btn-nav {
   flex: 0 0 auto;
-  padding: 10px 18px;
+  padding: 12px 20px;
   font-weight: 800;
-  border-radius: 20px;
-  background: var(--gray);
+  font-size: 0.85rem;
+  border-radius: 50px;
+  background: var(--gray); /* Fundo inativo escuro para contraste */
   color: var(--white);
   border: 1px solid var(--light-gray);
+  cursor: pointer;
+  transition: 0.2s;
   white-space: nowrap;
 }
 
+/* Botão Selecionado - Usa as novas cores da marca */
 .btn-nav.active {
-  background: var(--red);
-  border-color: var(--yellow);
+  background: var(--red); /* Vermelho Ponto X */
+  border-color: var(--yellow); /* Borda Amarelo Pastel Ponto X */
+  color: var(--white);
+}
+
+/* Grid de Produtos */
+.categoria-container {
+  padding: 15px;
+  margin-bottom: 100px;
 }
 
 .item-card {
   background: rgba(30, 30, 30, 0.7);
-  border-radius: 12px;
-  padding: 18px;
-  margin: 15px;
-  border-left: 5px solid var(--red);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid var(--light-gray);
+  position: relative;
+  overflow: hidden;
+  /* Borda lateral vermelha para destaque */
+  border-left: 5px solid var(--red); 
 }
 
-.item-card h3 { color: var(--yellow); margin-bottom: 5px; }
-.preco { font-size: 1.4rem; font-weight: 800; display: block; margin: 10px 0; }
+.item-card h3 {
+  color: var(--yellow); /* Títulos em Amarelo Pastel */
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
 
+.item-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.preco {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--white);
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Botão Adicionar - Usa o Amarelo Pastel */
 .btn-add {
   width: 100%;
-  padding: 12px;
-  background: var(--yellow);
-  color: #000;
+  padding: 14px;
+  background: var(--yellow); /* Amarelo Pastel Ponto X */
+  color: var(--dark); /* Texto escuro para contraste no amarelo */
   font-weight: 900;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
+/* Carrinho Flutuante - Atualizado para o Mascote */
 #carrinhoToggle {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 65px;
-  height: 65px;
-  background: var(--red);
+  width: 70px;
+  height: 70px;
+  background: var(--red); /* Fundo Vermelho Ponto X */
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid var(--yellow);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
   z-index: 99;
+  border: 3px solid var(--yellow); /* Borda Amarelo Pastel Ponto X */
+  cursor: pointer;
+  padding: 5px; /* Espaçamento interno para a imagem não tocar a borda */
 }
 
+/* Estilo da imagem do mascote dentro do botão */
+.mascote-carrinho-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Garante que o mascote inteiro apareça */
+    margin-bottom: -5px; /* Ajuste fino para posicionar melhor acima do contador */
+}
+
+#cart-count {
+  font-weight: 900;
+  font-size: 0.9rem;
+  background: var(--yellow);
+  color: var(--red);
+  padding: 2px 6px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 5px;
+}
+
+/* Tela do Carrinho (Modal) */
 #carrinho {
   position: fixed;
   top: 100%;
@@ -113,36 +190,140 @@ header {
   height: 100%;
   background: var(--dark);
   padding: 20px;
-  transition: 0.4s ease;
-  z-index: 100;
+  transition: 0.4s ease-out;
   overflow-y: auto;
+  z-index: 100;
 }
 
 #carrinho.open { top: 0; }
 
-.total-container {
-  border: 2px dashed var(--red);
-  padding: 15px;
+#carrinho h2 {
   text-align: center;
-  margin: 15px 0;
+  color: var(--yellow);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
 }
+
+textarea {
+  width: 100%;
+  height: 150px;
+  background: #111;
+  color: #eee;
+  border: 1px solid var(--light-gray);
+  border-radius: 10px;
+  padding: 12px;
+  font-family: monospace;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+/* Campos de Total e Opções */
+.total-container {
+  background: var(--gray);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 20px 0;
+  border: 2px dashed var(--red); /* Borda tracejada vermelha */
+}
+
+.total-container h3 { font-size: 1.8rem; }
+#total-valor { color: var(--yellow); }
 
 .input-grande {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  background: #111;
-  color: #fff;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
   border: 1px solid var(--light-gray);
-  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.carrinho-acoes {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-secundario {
+    flex: 1;
+    padding: 10px;
+    background: var(--gray);
+    border: 1px solid var(--light-gray);
+    color: var(--white);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.entrega-grid {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn-opcao-gigante {
+  flex: 1;
+  padding: 15px;
+  font-weight: 800;
+  border-radius: 10px;
+  border: 1px solid var(--light-gray);
+  background: var(--gray);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Botão de opção (Delivery/Retirar) Ativo */
+.btn-opcao-gigante.active {
+  background: var(--red);
+  border-color: var(--yellow);
 }
 
 #enviar {
   width: 100%;
-  padding: 18px;
-  background: var(--green);
+  padding: 20px;
+  background: var(--green); /* Verde WhatsApp */
   color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
   font-weight: 900;
-  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+/* Alert Box */
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.alert-box {
+  width: 85%;
+  padding: 30px;
+  background: var(--gray);
+  border-radius: 20px;
+  text-align: center;
+  border: 2px solid var(--yellow);
+}
+
+.alert-box h3 { color: var(--yellow); margin-bottom: 10px; }
+
+.btn-alert {
+  width: 100%;
+  padding: 12px;
+  background: var(--yellow);
+  border: none;
+  border-radius: 8px;
   margin-top: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--dark);
 }
