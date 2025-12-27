@@ -127,7 +127,7 @@ function enviarPedido() {
     msg += `*RETIRADA NO LOCAL*`;
   }
 
-  window.open(`https://wa.me/5511943198316?text=${encodeURIComponent(msg)}`);
+  window.open(`https://wa.me/5511920672544?text=${encodeURIComponent(msg)}`);
 }
 
 function alerta(t, m) {
